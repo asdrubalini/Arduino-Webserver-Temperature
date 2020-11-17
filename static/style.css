@@ -4,7 +4,8 @@ body {
     padding: 0;
 }
 
-@-webkit-keyframes rainbow-anim {
+
+/* @-webkit-keyframes rainbow-anim {
     0% {
         background-position: 0% 50%
     }
@@ -50,15 +51,17 @@ body {
     100% {
         background-position: 0% 50%
     }
-}
+} */
 
 .rainbow {
-    background: linear-gradient(to right, #f9c315, #ee8238, #ec4c41, #ea4250, #e51282, #a05199, #707ab1, #32bcdf, #61c4b1);
+    /* background: linear-gradient(to right, #f9c315, #ee8238, #ec4c41, #ea4250, #e51282, #a05199, #707ab1, #32bcdf, #61c4b1); */
+    background: linear-gradient(to right, #17618f, #da3700);
     background-size: 1800% 1800%;
-    -webkit-animation: rainbow-anim 15s ease infinite;
+    transition: background-position 0.5s ease;
+    /* -webkit-animation: rainbow-anim 15s ease infinite;
     -moz-animation: rainbow-anim 15s ease infinite;
     -o-animation: rainbow-anim 15s ease infinite;
-    animation: rainbow-anim 15s ease infinite;
+    animation: rainbow-anim 15s ease infinite; */
 }
 
 .container {

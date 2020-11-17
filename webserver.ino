@@ -28,11 +28,11 @@ struct temperature readAnalogTemperature() {
   // Read celsius temperature from sensor
 
   temperature t;
-  
+
   t.raw = analogRead(SENSOR_PIN);
   double sensorMilliVolt = t.raw * 4.88;
   t.celsius = sensorMilliVolt / 10;
-  
+
   return t;
 }
 
@@ -42,9 +42,6 @@ void makeResponse(EthernetClient thisClient) {
   thisClient.print("Content-Type: text/html\n\n");
 
   temperature t = readAnalogTemperature();
-  
-//  char strCelsius[6];
-//  dtostrf(t.celsius, 4, 2, strCelsius);
 
   String strCelsius = String(t.celsius);
   String strMilliVolts = String(t.raw * 4.88);
@@ -60,7 +57,7 @@ void makeResponse(EthernetClient thisClient) {
     "<body class=\"rainbow\">"
     "<div class=\"container\">"
     "<h1>Temperatura registrata:</h1>"
-    "<h1 id=\"temperature\">%s &deg;C (%s mV)</h1>"
+    "<h1 id=\"info\">%s &deg;C (%s mV)</h1>"
     "</div>"
     "<script src=\"script.js\"></script>"
     "</body>"

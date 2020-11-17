@@ -1,0 +1,10 @@
+version: "3.6"
+
+services:
+    nginx:
+        image: nginx:alpine
+        container_name: arduino-nginx
+        volumes:
+            - ./nginx/conf.d/:/etc/nginx/conf.d/
+        network_mode: "host"
+        restart: "no"

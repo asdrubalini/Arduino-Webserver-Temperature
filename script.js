@@ -12,7 +12,7 @@ const refreshPageContent = async() => {
 }
 
 (function() {
-    const reloadInterval = 500;
+    const reloadInterval = 1000;
 
     setInterval(async() => {
         await refreshPageContent();

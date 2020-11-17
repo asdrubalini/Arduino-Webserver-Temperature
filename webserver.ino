@@ -43,8 +43,11 @@ void makeResponse(EthernetClient thisClient) {
 
   temperature t = readAnalogTemperature();
   
-  char strCelsius[6];
-  dtostrf(t.celsius, 4, 2, strCelsius);
+//  char strCelsius[6];
+//  dtostrf(t.celsius, 4, 2, strCelsius);
+
+  String strCelsius = String(t.celsius);
+  String strMilliVolts = String(t.raw * 4.88);
 
   // Define a template for the request.
   // Values will be included in the string later
@@ -52,19 +55,19 @@ void makeResponse(EthernetClient thisClient) {
     "<html>"
     "<head>"
     "<title>Temperatura stanza</title>"
-    "<link rel=\"stylesheet\" href=\"//elegant-visvesvaraya-8ae3a2.netlify.app/style.css\">"
+    "<link rel=\"stylesheet\" href=\"style.css\">"
     "</head>"
     "<body class=\"rainbow\">"
     "<div class=\"container\">"
     "<h1>Temperatura registrata:</h1>"
-    "<h1 id=\"temperature\">%s °C (%d / 1024)</h1>"
+    "<h1 id=\"temperature\">%s &deg;C (%s mV)</h1>"
     "</div>"
-    "<script src=\"//elegant-visvesvaraya-8ae3a2.netlify.app/script.js\"></script>"
+    "<script src=\"script.js\"></script>"
     "</body>"
     "</html>";
 
   char *finalResponse = (char*) malloc(strlen(HTMLBodyTemplate) * sizeof(char));
-  sprintf(finalResponse, HTMLBodyTemplate, strCelsius, t.raw);
+  sprintf(finalResponse, HTMLBodyTemplate, strCelsius.c_str(), strMilliVolts.c_str());
 
   // Finally, send the complete HTTP response
   thisClient.println(finalResponse);

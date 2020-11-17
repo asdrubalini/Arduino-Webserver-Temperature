@@ -4,7 +4,8 @@ services:
     nginx:
         image: nginx:alpine
         container_name: arduino-nginx
-        volumes:
+        network_mode: host
+        volumes: 
             - ./nginx/conf.d/:/etc/nginx/conf.d/
-        network_mode: "host"
-        restart: "no"
+            - ./static/:/static/
+        restart: unless-stopped

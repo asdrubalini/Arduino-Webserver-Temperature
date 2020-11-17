@@ -52,14 +52,14 @@ void makeResponse(EthernetClient thisClient) {
     "<html>"
     "<head>"
     "<title>Temperatura stanza</title>"
-    "<link rel=\"stylesheet\" href=\"https://gist.githubusercontent.com/unizLike/4fbe109f457bfe3f73e5937183fcd9a0/raw/83630a16db327bbae8aa63f0438423106d14fbe2/rainbow.css\">"
+    "<link rel=\"stylesheet\" href=\"//elegant-visvesvaraya-8ae3a2.netlify.app/style.css\">"
     "</head>"
     "<body class=\"rainbow\">"
     "<div class=\"container\">"
     "<h1>Temperatura registrata:</h1>"
     "<h1 id=\"temperature\">%s °C (%d / 1024)</h1>"
     "</div>"
-    "<script src=\"//10.0.0.10/script.js\"></script>"
+    "<script src=\"//elegant-visvesvaraya-8ae3a2.netlify.app/script.js\"></script>"
     "</body>"
     "</html>";
 

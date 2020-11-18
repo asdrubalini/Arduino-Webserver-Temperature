@@ -4,7 +4,7 @@ const minTemperature = 23
 const maxTemperature = 35
 
 const reloadInterval = 1000
-const emojiInterval = 400
+const emojiInterval = 300
 
 const hotImagePath = "fire.png"
 const coldImagePath = "cold.png"

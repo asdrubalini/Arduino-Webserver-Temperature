@@ -1,7 +1,7 @@
 const temperatureEmojiThreshold = 26.8
 
 const minTemperature = 23
-const maxTemperature = 32
+const maxTemperature = 35
 
 const reloadInterval = 1000
 const emojiInterval = 400

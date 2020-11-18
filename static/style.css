@@ -92,3 +92,12 @@ h1 {
         transform: scale(0.3);
     }
 } */
+
+.top-panel {
+    position: fixed;
+    z-index: 99999;
+    height: 100%;
+    width: 100%;
+    background-color: transparent;
+    overflow: hidden;
+}

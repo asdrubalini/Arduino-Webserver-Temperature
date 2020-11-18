@@ -1,3 +1,13 @@
+const temperatureEmojiThreshold = 26.8
+
+const minTemperature = 23
+const maxTemperature = 32
+
+const reloadInterval = 1000
+const emojiInterval = 400
+
+let lastEmoji = null
+
 const refreshPageContent = async() => {
     fetch("/")
         .then(response => {
@@ -23,14 +33,12 @@ const parseTemperature = () => {
 
 const setBackgroundColorFromTemperature = () => {
     const temperature = parseTemperature()
-    const backgroundPositionPercentage = proportion(temperature, 23, 32, 0, 100)
+    const backgroundPositionPercentage = proportion(temperature, minTemperature, maxTemperature, 0, 100)
     document.getElementsByClassName("rainbow")[0].style.backgroundPosition = `${backgroundPositionPercentage}%`
 }
 
-let lastEmoji = null
-
 const getCurrentEmojiFromTemperature = () => {
-    currentEmoji = parseTemperature() > 26.0 ? 'fire.png' : 'cold.png'
+    currentEmoji = parseTemperature() > temperatureEmojiThreshold ? 'fire.png' : 'cold.png'
 
     if (lastEmoji === null) {
         lastEmoji = currentEmoji
@@ -51,7 +59,7 @@ const getCurrentEmojiFromTemperature = () => {
 
 function generatePosition() {
     const x = Math.round((Math.random() * 100) - 10) + '%';
-    const y = Math.round(Math.random() * 100) + '%';
+    const y = Math.round(Math.random() * 100) - 15 + '%';
     return [x, y];
 }
 
@@ -79,8 +87,10 @@ function generateEmojis() {
 
 
 (function() {
-    const reloadInterval = 1000
-    const emojiInterval = 400
+    // Prevent users from clicking
+    const topPanel = document.createElement("div")
+    topPanel.classList.add("top-panel")
+    document.body.insertBefore(topPanel, document.getElementsByClassName("container")[0])
 
     setBackgroundColorFromTemperature()
 

@@ -6,7 +6,10 @@ const maxTemperature = 35
 const reloadInterval = 1000
 const emojiInterval = 400
 
-let lastEmoji = null
+const hotImagePath = "fire.png"
+const coldImagePath = "cold.png"
+
+let latestEmoji = null
 
 const refreshPageContent = async() => {
     fetch("/")
@@ -16,8 +19,11 @@ const refreshPageContent = async() => {
         .then(html => {
             let parser = new DOMParser()
             let responseDocument = parser.parseFromString(html, 'text/html')
-            let newTemperature = responseDocument.getElementById("info").innerText
-            document.getElementById("info").innerText = newTemperature
+            let newTemperatureCelsius = responseDocument.getElementById("info_celsius").innerText
+            let newTemperatureOther = responseDocument.getElementById("info_other").innerText
+
+            document.getElementById("info_celsius").innerText = newTemperatureCelsius
+            document.getElementById("info_other").innerText = newTemperatureOther
         });
 }
 
@@ -26,7 +32,7 @@ const proportion = function(value, in_min, in_max, out_min, out_max) {
 }
 
 const parseTemperature = () => {
-    const temperatureString = document.getElementById("info").innerText
+    const temperatureString = document.getElementById("info_celsius").innerText
     const temperature = parseFloat(temperatureString.split(" ")[0])
     return temperature
 }
@@ -38,20 +44,20 @@ const setBackgroundColorFromTemperature = () => {
 }
 
 const getCurrentEmojiFromTemperature = () => {
-    currentEmoji = parseTemperature() > temperatureEmojiThreshold ? 'fire.png' : 'cold.png'
+    currentEmoji = parseTemperature() > temperatureEmojiThreshold ? hotImagePath : coldImagePath
 
-    if (lastEmoji === null) {
-        lastEmoji = currentEmoji
+    if (latestEmoji === null) {
+        latestEmoji = currentEmoji
     }
 
-    if (currentEmoji !== lastEmoji) {
+    if (currentEmoji !== latestEmoji) {
         // Emoji change detected, update all existing emojis
         for (let emoji in document.getElementsByClassName("emoji")) {
             console.log("updating emojis")
             emoji["src"] = currentEmoji
         }
 
-        lastEmoji = currentEmoji
+        latestEmoji = currentEmoji
     }
 
     return currentEmoji

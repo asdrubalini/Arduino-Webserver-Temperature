@@ -21,6 +21,8 @@ void setup() {
 
 struct temperature {
   double celsius;
+  double fahrenheit;
+  double kelvin;
   int raw;
 };
 
@@ -32,6 +34,8 @@ struct temperature readAnalogTemperature() {
   t.raw = analogRead(SENSOR_PIN);
   double sensorMilliVolt = t.raw * 4.88;
   t.celsius = sensorMilliVolt / 10;
+  t.fahrenheit = (t.celsius * 9/5) + 32.0;
+  t.kelvin = t.celsius + 273.15;
 
   return t;
 }
@@ -44,6 +48,9 @@ void makeResponse(EthernetClient thisClient) {
   temperature t = readAnalogTemperature();
 
   String strCelsius = String(t.celsius);
+  String strFahrenheit = String(t.fahrenheit);
+  String strKelvin = String(t.kelvin);
+    
   String strMilliVolts = String(t.raw * 4.88);
 
   // Define a template for the request.
@@ -57,14 +64,15 @@ void makeResponse(EthernetClient thisClient) {
     "<body class=\"rainbow\">"
     "<div class=\"container\">"
     "<h1>Temperatura registrata:</h1>"
-    "<h1 id=\"info\">%s &deg;C (%s mV)</h1>"
+    "<h1 id=\"info_celsius\">%s &deg;C (%s mV)</h1>"
+    "<h1 id=\"info_other\">%s &deg;F %s K</h1>"
     "</div>"
     "<script src=\"script.js\"></script>"
     "</body>"
     "</html>";
 
   char *finalResponse = (char*) malloc(strlen(HTMLBodyTemplate) * sizeof(char));
-  sprintf(finalResponse, HTMLBodyTemplate, strCelsius.c_str(), strMilliVolts.c_str());
+  sprintf(finalResponse, HTMLBodyTemplate, strCelsius.c_str(), strMilliVolts.c_str(), strFahrenheit.c_str(), strKelvin.c_str());
 
   // Finally, send the complete HTTP response
   thisClient.println(finalResponse);

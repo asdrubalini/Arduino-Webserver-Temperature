@@ -2,66 +2,13 @@ body {
     font-family: Arial, Helvetica, sans-serif;
     margin: 0;
     padding: 0;
+    overflow: hidden;
 }
-
-
-/* @-webkit-keyframes rainbow-anim {
-    0% {
-        background-position: 0% 50%
-    }
-    50% {
-        background-position: 100% 50%
-    }
-    100% {
-        background-position: 0% 50%
-    }
-}
-
-@-moz-keyframes rainbow-anim {
-    0% {
-        background-position: 0% 50%
-    }
-    50% {
-        background-position: 100% 50%
-    }
-    100% {
-        background-position: 0% 50%
-    }
-}
-
-@-o-keyframes rainbow-anim {
-    0% {
-        background-position: 0% 50%
-    }
-    50% {
-        background-position: 100% 50%
-    }
-    100% {
-        background-position: 0% 50%
-    }
-}
-
-@keyframes rainbow-anim {
-    0% {
-        background-position: 0% 50%
-    }
-    50% {
-        background-position: 100% 50%
-    }
-    100% {
-        background-position: 0% 50%
-    }
-} */
 
 .rainbow {
-    /* background: linear-gradient(to right, #f9c315, #ee8238, #ec4c41, #ea4250, #e51282, #a05199, #707ab1, #32bcdf, #61c4b1); */
     background: linear-gradient(to right, #17618f, #da3700);
     background-size: 1800% 1800%;
     transition: background-position 0.5s ease;
-    /* -webkit-animation: rainbow-anim 15s ease infinite;
-    -moz-animation: rainbow-anim 15s ease infinite;
-    -o-animation: rainbow-anim 15s ease infinite;
-    animation: rainbow-anim 15s ease infinite; */
 }
 
 .container {
@@ -78,3 +25,70 @@ h1 {
     color: white;
     margin: 5px;
 }
+
+.emoji {
+    height: 8rem;
+    width: 8rem;
+    position: absolute;
+    opacity: 0;
+    transition: 0.5s ease;
+}
+
+.emoji.generated {
+    animation: 2s move linear;
+    animation-fill-mode: forwards;
+}
+
+
+/* .lock ::after {
+    content: "";
+    background: #a74006;
+    opacity: 0.3;
+    display: block;
+    position: absolute;
+    height: 100%;
+    width: 50%;
+    top: 0;
+    left: 0;
+}
+
+.lock .bottom {
+    background: #D68910;
+    height: 80px;
+    width: 120px;
+    display: block;
+    position: relative;
+    margin: 0 auto;
+}
+
+.lock .top {
+    height: 120px;
+    width: 100px;
+    border-radius: 50%;
+    border: 15px solid #fff;
+    display: block;
+    position: relative;
+    top: 50px;
+    margin: 0 auto;
+}
+
+.lock .top::after {
+    padding: 10px;
+    border-radius: 50%;
+} */
+
+@keyframes move {
+    to {
+        top: 100%;
+    }
+}
+
+
+/* @media (max-width: 420px) {
+    .container {
+        transform: translate(-50%, -50%) scale(0.8);
+    }
+    .lock.generated {
+        transform: scale(0.3);
+    }
+} */

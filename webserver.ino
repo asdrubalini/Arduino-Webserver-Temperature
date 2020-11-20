@@ -97,8 +97,6 @@ void loop()
 
     // Create and send response back to the client
     makeHTTPResponse(client);
-    // give the web browser time to receive the data
-    //    delay(100);
     // close the connection:
     client.stop();
 }
